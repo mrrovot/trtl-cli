@@ -1,0 +1,18 @@
+{
+  "name": "trtl",
+  "version": "1.0.0",
+  "description": "Trtl network status CLI",
+  "main": "index.js",
+  "preferGlobal": true,
+  "bin": "./commands.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mrrovot",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "commander": "^2.17.1",
+    "inquirer": "^6.2.0"
+  }
+}
