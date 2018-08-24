@@ -31,17 +31,17 @@ $ npm link
 
 ### Commands (work in progress)
 
-List Customers (network or n)
+Shows network data (network or n)
 ```sh
 $ trtl network
 ```
 
-Find Customers (market or m)
+List market data (market or m)
 ```sh
 $ trtl market
 ```
 
-Add Customer (supply or s)
+List circulating supply (supply or s)
 ```sh
 $ trtl supply
 ```
