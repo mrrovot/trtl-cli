@@ -12,6 +12,15 @@ program
   .version('1.0.0')
   .description('TRTL CLI')
 
+program.on('command:*', function () {
+  console.error('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
+  process.exit(1);
+});
+
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+  return;
+}
 
 program
   .command('market')
