@@ -31,6 +31,11 @@ $ npm link
 
 ### Commands (work in progress)
 
+Check list of all commands (--help or --h)
+```sh
+$ trtl --help
+```
+
 Shows network data (network or n)
 ```sh
 $ trtl network
