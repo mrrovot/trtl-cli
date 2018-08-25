@@ -57,7 +57,7 @@ program
     .action((qty) => price(qty));
 
 program
-    .command('ascii [pic]')
+    .command('ascii <pic>')
     .alias('a')
     .description('Displays ASCII art')
     .action((pic) => ascii(pic));
