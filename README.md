@@ -41,6 +41,11 @@ Shows network data (network or n)
 $ trtl network
 ```
 
+Get usd worth of any TRTL amount (price <quantity> or p <quantity>)
+```sh
+$ trtl price 100
+```
+
 List market data (market or m)
 ```sh
 $ trtl market
@@ -59,3 +64,7 @@ $ trtl ascii <file>
 ### Contribute
 
 Please do a pull request with any data about trtl that can be useful.
+
+### Contributors
+
+@zack796 
