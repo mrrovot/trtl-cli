@@ -1,4 +1,6 @@
 var fs = require('fs');
+var path = require('path');
+var jsonPath = path.join(__dirname, './',);
 
 //helper to get number with commas
 const numberWithCommas = (x) => {
@@ -17,12 +19,22 @@ function formatBytes(a, b) {
     return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
 }
 
+
 //Grabs a text file that has ASCII text to display under the "swanson" command
 function grabASCII(file){
   var picture = fs.readFileSync(__dirname + "\\ascii\\" + file + ".txt").toString('utf-8');
   var textByLine = picture.split('');
   console.info(textByLine.join(''));
 }
+
+
+// replaces all commas for trtl worth calculation
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
+
 
 module.exports = {
     numberWithCommas,
