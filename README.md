@@ -56,6 +56,11 @@ List circulating supply (supply or s)
 $ trtl supply
 ```
 
+Displays ascii text from a file in the ascii folder
+```sh
+$ trtl ascii <file>
+```
+
 ### Contribute
 
 Please do a pull request with any data about trtl that can be useful.
