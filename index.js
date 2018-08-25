@@ -4,7 +4,8 @@ const colors = require('colors')
 const {
     numberWithCommas,
     formatBytes,
-    grabASCII
+    grabASCII,
+    replaceAll
 } = require('./helpers');
 
 const market = () => {
@@ -58,7 +59,7 @@ const price = (qty) => {
             console.info(`Current price: $${response.data.data.quotes.USD.price}`)
 
             if (qty) {
-                console.info(`${qty}TRTL is: $${trtl_price * qty}`)
+                console.info(`${qty}TRTL is: $${(trtl_price * qty.replaceAll(",", "")).toFixed(2)}`)
             } else {
                 console.info('\n' + `You can try "trtl price <amount>" to calculate how much your TRTLs are worth`.red)
             }

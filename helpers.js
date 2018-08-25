@@ -27,6 +27,15 @@ function grabASCII(file) {
     console.info(textByLine.join(''));
 }
 
+
+// replaces all commas for trtl worth calculation
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
+
+
 module.exports = {
     numberWithCommas,
     formatBytes,
