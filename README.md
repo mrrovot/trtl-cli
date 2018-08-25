@@ -45,10 +45,6 @@ Get usd worth of any TRTL amount (price <quantity> or p <quantity>)
 ```sh
 $ trtl price 100
 ```
-To just get current price
-```sh
-$ trtl price
-```
 
 List market data (market or m)
 ```sh
@@ -62,4 +58,8 @@ $ trtl supply
 
 ### Contribute
 
-Please do a pull request with any data about trtl that can be useful. 
+Please do a pull request with any data about trtl that can be useful.
+
+### Contributors
+
+@zack796 
