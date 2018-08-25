@@ -21,10 +21,10 @@ function formatBytes(a, b) {
 
 
 //Grabs a text file that has ASCII text to display under the "swanson" command
-function grabASCII(file) {
-    var picture = fs.readFileSync("./ascii/" + file + ".txt").toString('utf-8');
-    var textByLine = picture.split('');
-    console.info(textByLine.join(''));
+function grabASCII(file){
+  var picture = fs.readFileSync(__dirname + "\\ascii\\" + file + ".txt").toString('utf-8');
+  var textByLine = picture.split('');
+  console.info(textByLine.join(''));
 }
 
 
