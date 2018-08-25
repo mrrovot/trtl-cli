@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 //helper to get number with commas
 const numberWithCommas = (x) => {
     var parts = x.toString().split(".");
@@ -15,7 +17,15 @@ function formatBytes(a, b) {
     return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
 }
 
+//Grabs a text file that has ASCII text to display under the "swanson" command
+function grabASCII(file){
+  var picture = fs.readFileSync("./ascii/" + file + ".txt").toString('utf-8');
+  var textByLine = picture.split('');
+  console.info(textByLine.join(''));
+}
+
 module.exports = {
     numberWithCommas,
-    formatBytes
+    formatBytes,
+    grabASCII
 };

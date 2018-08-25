@@ -2,7 +2,8 @@ const axios = require('axios')
 
 const {
   numberWithCommas,
-  formatBytes
+  formatBytes,
+  grabASCII
 } = require('./helpers');
 
 const market = () => {
@@ -19,7 +20,7 @@ const market = () => {
     .catch(function (error) {
       console.info(error);
     })
-  
+
 }
 
 const supply = () => {
@@ -30,7 +31,7 @@ const supply = () => {
     .catch(function (error) {
       console.info(error);
     })
-  
+
 }
 
 const network = () => {
@@ -45,7 +46,11 @@ const network = () => {
     .catch(function (error) {
       console.info(error);
     })
-  
+
+}
+
+const ascii = (a) => {
+  grabASCII(a)
 }
 
 
@@ -53,5 +58,6 @@ const network = () => {
 module.exports = {
   market,
   supply,
-  network
+  network,
+  ascii
 }
