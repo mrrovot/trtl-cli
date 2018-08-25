@@ -1,6 +1,11 @@
+<<<<<<< HEAD
+const fs = require('fs');
+const path = require('path');
+=======
 var fs = require('fs');
 var path = require('path');
 var jsonPath = path.join(__dirname, './',);
+>>>>>>> 0144919dc3daeb4848458e3a79791ccc93badb32
 
 //helper to get number with commas
 const numberWithCommas = (x) => {
@@ -22,9 +27,8 @@ function formatBytes(a, b) {
 
 //Grabs a text file that has ASCII text to display under the "swanson" command
 function grabASCII(file){
-  var picture = fs.readFileSync(__dirname + "\\ascii\\" + file + ".txt").toString('utf-8');
-  var textByLine = picture.split('');
-  console.info(textByLine.join(''));
+  var ascii = fs.readFileSync(path.join(__dirname, '../trtl-cli/ascii/' + file + ".txt"), 'utf8')
+  console.info(ascii)
 }
 
 
