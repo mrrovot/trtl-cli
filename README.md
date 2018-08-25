@@ -41,6 +41,15 @@ Shows network data (network or n)
 $ trtl network
 ```
 
+Get usd worth of any TRTL amount (price <quantity> or p <quantity>)
+```sh
+$ trtl price 100
+```
+To just get current price
+```sh
+$ trtl price
+```
+
 List market data (market or m)
 ```sh
 $ trtl market

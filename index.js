@@ -1,4 +1,5 @@
 const axios = require('axios')
+const colors = require('colors')
 
 const {
   numberWithCommas,
@@ -12,9 +13,6 @@ const market = () => {
       console.info(`24h price change: ${response.data.data.quotes.USD.percent_change_24h}%`)
       console.info(`24h Volume: $${response.data.data.quotes.USD.volume_24h}`)
       console.info(`Circulating supply: ${numberWithCommas(response.data.data.circulating_supply)}`)
-
-
-      // console.info(response.data);
     })
     .catch(function (error) {
       console.info(error);
@@ -48,10 +46,28 @@ const network = () => {
   
 }
 
+const price = (qty) => {
+  axios.get('https://api.coinmarketcap.com/v2/ticker/2958/')
+    .then(function (response) {
+      var trtl_price = response.data.data.quotes.USD.price
+      console.info(`Current price: $${response.data.data.quotes.USD.price}`)
+      
+      if(qty) {
+        console.info(`${qty}TRTL is: $${trtl_price * qty}`)
+      } else {
+        console.info('\n' + `You can try "trtl price <amount>" to calculate how much your TRTLs are worth`.red)
+      }
+    })
+    .catch(function (error) {
+      console.info(error);
+    })
+}
+
 
 // Export All Methods
 module.exports = {
   market,
   supply,
-  network
+  network,
+  price
 }

@@ -2,10 +2,13 @@
 
 const program = require('commander');
 const { prompt } = require('inquirer');
+var colors = require('colors');
+
 const {
   market,
   supply,
-  network
+  network,
+  price
 } = require('./index');
 
 program 
@@ -17,8 +20,12 @@ program.on('command:*', function () {
   process.exit(1);
 });
 
+function make_red(txt) {
+  return colors.red(txt); //display the help text in red on the console
+}
+
 if (!process.argv.slice(2).length) {
-  program.outputHelp();
+  program.outputHelp(make_red);
   return;
 }
 
@@ -40,6 +47,12 @@ program
   .description('Shows network data')
   .action(() => network());
 
+var qty;
+program
+  .command('price [qty]')
+  .alias('p')
+  .description('Update a customer')
+  .action((qty) => price(qty));
 
 
 program.parse(process.argv);
