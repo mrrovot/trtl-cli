@@ -5,10 +5,11 @@ const { prompt } = require('inquirer');
 const {
   market,
   supply,
-  network
+  network,
+  ascii
 } = require('./index');
 
-program 
+program
   .version('1.0.0')
   .description('TRTL CLI')
 
@@ -39,6 +40,12 @@ program
   .alias('n')
   .description('Shows network data')
   .action(() => network());
+
+  program
+    .command('ascii <cmd>')
+    .alias('a')
+    .description('Displays ASCII art')
+    .action((cmd) => ascii(cmd));
 
 
 
