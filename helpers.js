@@ -1,4 +1,5 @@
-var fs = require('fs');
+const fs = require('fs');
+const path = require('path');
 
 //helper to get number with commas
 const numberWithCommas = (x) => {
@@ -19,9 +20,8 @@ function formatBytes(a, b) {
 
 //Grabs a text file that has ASCII text to display under the "swanson" command
 function grabASCII(file){
-  var picture = fs.readFileSync(__dirname + "\\ascii\\" + file + ".txt").toString('utf-8');
-  var textByLine = picture.split('');
-  console.info(textByLine.join(''));
+  var ascii = fs.readFileSync(path.join(__dirname, '../trtl-cli/ascii/' + file + ".txt"), 'utf8')
+  console.info(ascii)
 }
 
 module.exports = {

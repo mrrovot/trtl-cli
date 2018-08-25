@@ -42,10 +42,10 @@ program
   .action(() => network());
 
   program
-    .command('ascii <cmd>')
+    .command('ascii [pic]')
     .alias('a')
     .description('Displays ASCII art')
-    .action((cmd) => ascii(cmd));
+    .action((pic) => ascii(pic));
 
 
 
