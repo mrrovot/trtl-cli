@@ -48,10 +48,6 @@ program
     .description('Shows network data')
     .action(() => network());
 
-<<<<<<< HEAD
-  program
-    .command('ascii [pic]')
-=======
 var qty;
 program
     .command('price [qty]')
@@ -60,8 +56,7 @@ program
     .action((qty) => price(qty));
 
 program
-    .command('ascii <cmd>')
->>>>>>> 0144919dc3daeb4848458e3a79791ccc93badb32
+    .command('ascii <pic>')
     .alias('a')
     .description('Displays ASCII art')
     .action((pic) => ascii(pic));

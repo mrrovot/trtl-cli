@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 const fs = require('fs');
 const path = require('path');
-=======
-var fs = require('fs');
-var path = require('path');
 var jsonPath = path.join(__dirname, './',);
->>>>>>> 0144919dc3daeb4848458e3a79791ccc93badb32
 
 //helper to get number with commas
 const numberWithCommas = (x) => {
