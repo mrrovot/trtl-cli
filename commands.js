@@ -48,7 +48,6 @@ program
     .description('Shows network data')
     .action(() => network());
 
-  
 var qty;
 program
     .command('price [qty]')
