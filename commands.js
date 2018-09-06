@@ -2,7 +2,9 @@
 
 const program = require('commander');
 const { prompt } = require('inquirer');
+const version = require('./package.json');
 var colors = require('colors');
+
 
 const {
     market,
@@ -13,7 +15,7 @@ const {
 } = require('./index');
 
 program
-    .version('1.0.0')
+    .version(version.version)
     .description('TRTL CLI')
 
 program.on('command:*', function() {
@@ -56,7 +58,7 @@ program
     .action((qty) => price(qty));
 
 program
-    .command('ascii <pic>')
+    .command('ascii [pic]')
     .alias('a')
     .description('Displays ASCII art')
     .action((pic) => ascii(pic));

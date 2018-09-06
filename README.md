@@ -5,7 +5,7 @@ Command line interface to check TurtleCoin network status and community activity
 ![Alt Text](https://media.giphy.com/media/8m7LEArtWVfHkuWpPV/giphy.gif)
 
 ### Version
-1.0.0
+1.0.25
 
 ## Usage
 
@@ -56,7 +56,7 @@ List circulating supply (supply or s)
 $ trtl supply
 ```
 
-Displays ascii text from a file in the ascii folder
+Displays ascii text from a file in the ascii folder. If nothing is specified, a random ASCII will be picked.
 ```sh
 $ trtl ascii <file>
 ```
@@ -67,4 +67,4 @@ Please do a pull request with any data about trtl that can be useful.
 
 ### Contributors
 
-@zack796 
+@zack796
