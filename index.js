@@ -1,6 +1,11 @@
+const TurtleCoind = require('turtlecoin-rpc').TurtleCoind
 const axios = require('axios')
 const colors = require('colors')
 const convert = 100000000
+
+const daemon = new TurtleCoind({
+  host: 'public.turtlenode.io'
+})
 
 const {
     numberWithCommas,
@@ -42,12 +47,12 @@ const supply = () => {
 }
 
 const network = () => {
-    axios.get('http://public.turtlenode.io:11898/getinfo')
+    daemon.getInfo()
         .then(function(response) {
-            console.info(`\nNetwork block height: ${response.data.network_height}`);
-            console.info(`The current global hashrate is: ${formatBytes(response.data.hashrate)}`);
-            console.info(`Mining diffculty: ${response.data.difficulty}`);
-            console.info(`Client version: ${response.data.version}`);
+            console.info(`\nNetwork block height: ${response.network_height}`);
+            console.info(`The current global hashrate is: ${formatBytes(response.hashrate)}`);
+            console.info(`Mining diffculty: ${response.difficulty}`);
+            console.info(`Client version: ${response.version}`);
 
         })
         .catch(function(error) {
