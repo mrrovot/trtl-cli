@@ -57,7 +57,7 @@ const network = () => {
 }
 
 const ascii = (a) => {
-    grabASCII(a)
+  grabASCII(a)
 }
 
 const price = (qty) => {
