@@ -11,7 +11,8 @@ const {
     supply,
     network,
     price,
-    ascii
+    ascii,
+    checkpoints
 } = require('./index');
 
 program
@@ -63,6 +64,11 @@ program
     .description('Displays ASCII art')
     .action((pic) => ascii(pic));
 
+program
+    .command('checkpoints')
+    .alias('c')
+    .description('Get latest checkpoint update')
+    .action(() => checkpoints());
 
 
 program.parse(process.argv);

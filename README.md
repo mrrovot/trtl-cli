@@ -61,6 +61,11 @@ Displays ascii text from a file in the ascii folder. If nothing is specified, a 
 $ trtl ascii <file>
 ```
 
+Check how long ago the checkpoints were updated
+```sh
+$ trtl checkpoints
+```
+
 ### Contribute
 
 Please do a pull request with any data about trtl that can be useful.
