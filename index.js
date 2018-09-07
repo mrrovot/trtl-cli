@@ -18,7 +18,7 @@ const market = () => {
     axios.get('https://api.coinmarketcap.com/v2/ticker/2958/?convert=LTC')
     .then((response) => {
         console.info(`\nCurrent USD Price: $${response.data.data.quotes.USD.price}`)
-        console.info(`Current Litoshi Price: 	Ł ${response.data.data.quotes.LTC.price * convert}`)
+        console.info(`Current Litoshi Price: 	Ł ${(response.data.data.quotes.LTC.price * convert).toFixed(2)}`)
         // Outputs red text if 24hr change is negative, green if 24hr change is positive
 
         if(response.data.data.quotes.USD.percent_change_24h < 0){
@@ -27,7 +27,7 @@ const market = () => {
           console.info(`24h price change: ${response.data.data.quotes.USD.percent_change_24h}%`.green)
         }
 
-        console.info(`24h Volume: $${response.data.data.quotes.USD.volume_24h}`)
+        console.info(`24h Volume: $${response.data.data.quotes.USD.volume_24h.toFixed(2)}`)
         console.info(`Circulating supply: ${numberWithCommas(response.data.data.circulating_supply)}`)
     })
     .catch(function(error) {
@@ -70,11 +70,11 @@ const price = (qty) => {
         .then((response) => {
             var trtl_usd = response.data.data.quotes.USD.price
             var trtl_lit = response.data.data.quotes.LTC.price
-            console.info(`\nCurrent price: $${trtl_usd} or Ł ${trtl_lit * convert}`)
+            console.info(`\nCurrent price: $${trtl_usd} or Ł ${(trtl_lit * convert).toFixed(2)}`)
 
             if (qty) {
-                console.info(`${qty} TRTL is: $${(trtl_usd * qty.replaceAll(",", "")).toFixed(2)}`)
-                console.info(`${qty} TRTL is: ${(trtl_lit * qty.replaceAll(",", "")).toFixed(2)} Litecoin`)
+                console.info(`${qty} TRTL is: $${(trtl_usd * qty.replaceAll(",", "")).toFixed(10)}`)
+                console.info(`${qty} TRTL is: ${(trtl_lit * qty.replaceAll(",", "")).toFixed(10)} Litecoin`)
             } else {
                 console.info('\n' + `You can try "trtl price <amount>" to calculate how much your TRTLs are worth`.red)
             }
