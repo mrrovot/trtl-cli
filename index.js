@@ -2,7 +2,6 @@ const TurtleCoind = require('turtlecoin-rpc').TurtleCoind
 const axios = require('axios')
 const colors = require('colors');
 const timeago = require("timeago.js");
-
 const convert = 100000000
 
 const daemon = new TurtleCoind({
@@ -76,7 +75,7 @@ const price = (qty) => {
 
             if (qty) {
                 console.info(`${qty} TRTL is: $${(trtl_usd * qty.replaceAll(",", "")).toFixed(10)}`)
-                console.info(`${qty} TRTL is: ${(trtl_lit * qty.replaceAll(",", "")).toFixed(10)} Litecoin`)
+                console.info(`${qty} TRTL is: $${(trtl_lit * qty.replaceAll(",", "")).toFixed(10)} Litecoin`)
             } else {
                 console.info('\n' + `You can try "trtl price <amount>" to calculate how much your TRTLs are worth`.red)
             }
@@ -87,24 +86,11 @@ const price = (qty) => {
 }
 
 const checkpoints = () => {
-    function getLastCommits() {
-        return axios.get('https://api.github.com/repos/turtlecoin/checkpoints/commits');
-    }
-
-    function getLastPullRequests() {
-        return axios.get('https://api.github.com/repos/turtlecoin/checkpoints/pulls');
-    }
-
-    axios.all([getLastCommits(), getLastPullRequests()])
-        .then(axios.spread(function(commits, pulls) {
-            if (pulls.data[0].created_at) {
-                console.info(`\nCheckpoints updated ${timeago().format(pulls.data[0].created_at)}`);
-                console.info(`download checkpoints from: http://checkpoints.info`)
-            } else {
-                console.info(`\nCheckpoints updated ${timeago().format(commits.data[0].commit.author.date)}`);
-                console.info(`download checkpoints from: http://checkpoints.info`)
-            }
-        }));
+    axios.get('https://api.github.com/repos/turtlecoin/checkpoints')
+        .then((updateInfo) => {
+          console.log(`\nCheckpoints updated ${timeago().format(updateInfo.data.updated_at)}`)
+          console.log(`Download the latest checkpoint from: http://checkpoints.info/`)
+        });
 }
 
 // Export All Methods
