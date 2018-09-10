@@ -84,7 +84,6 @@ const price = (qty) => {
         })
 }
 
-
 // Export All Methods
 module.exports = {
     market,

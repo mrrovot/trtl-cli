@@ -50,7 +50,6 @@ program
     .description('Shows network data')
     .action(() => network());
 
-var qty;
 program
     .command('price [qty]')
     .alias('p')
@@ -62,7 +61,6 @@ program
     .alias('a')
     .description('Displays ASCII art')
     .action((pic) => ascii(pic));
-
 
 
 program.parse(process.argv);

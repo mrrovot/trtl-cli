@@ -1,6 +1,6 @@
 {
   "name": "trtl",
-  "version": "1.0.42",
+  "version": "1.0.44",
   "description": "Trtl network status CLI",
   "main": "index.js",
   "preferGlobal": true,
