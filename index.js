@@ -1,10 +1,12 @@
 const TurtleCoind = require('turtlecoin-rpc').TurtleCoind
 const axios = require('axios')
-const colors = require('colors')
+const colors = require('colors');
+const timeago = require("timeago.js");
+
 const convert = 100000000
 
 const daemon = new TurtleCoind({
-  host: 'public.turtlenode.io'
+    host: 'public.turtlenode.io'
 })
 
 const {
@@ -16,23 +18,23 @@ const {
 
 const market = () => {
     axios.get('https://api.coinmarketcap.com/v2/ticker/2958/?convert=LTC')
-    .then((response) => {
-        console.info(`\nCurrent USD Price: $${response.data.data.quotes.USD.price}`)
-        console.info(`Current Litoshi Price: 	Ł ${(response.data.data.quotes.LTC.price * convert).toFixed(2)}`)
-        // Outputs red text if 24hr change is negative, green if 24hr change is positive
+        .then((response) => {
+            console.info(`\nCurrent USD Price: $${response.data.data.quotes.USD.price}`)
+            console.info(`Current Litoshi Price:    Ł ${(response.data.data.quotes.LTC.price * convert).toFixed(2)}`)
+            // Outputs red text if 24hr change is negative, green if 24hr change is positive
 
-        if(response.data.data.quotes.USD.percent_change_24h < 0){
-          console.info(`\n24h price change: ${response.data.data.quotes.USD.percent_change_24h + '%'}`.red)
-        } else if(response.data.data.quotes.USD.percent_change_24h > 0){
-          console.info(`24h price change: ${response.data.data.quotes.USD.percent_change_24h}%`.green)
-        }
+            if (response.data.data.quotes.USD.percent_change_24h < 0) {
+                console.info(`\n24h price change: ${response.data.data.quotes.USD.percent_change_24h + '%'}`.red)
+            } else if (response.data.data.quotes.USD.percent_change_24h > 0) {
+                console.info(`24h price change: ${response.data.data.quotes.USD.percent_change_24h}%`.green)
+            }
 
-        console.info(`24h Volume: $${response.data.data.quotes.USD.volume_24h.toFixed(2)}`)
-        console.info(`Circulating supply: ${numberWithCommas(response.data.data.circulating_supply)}`)
-    })
-    .catch(function(error) {
-        console.info(error);
-    })
+            console.info(`24h Volume: $${response.data.data.quotes.USD.volume_24h.toFixed(2)}`)
+            console.info(`Circulating supply: ${numberWithCommas(response.data.data.circulating_supply)}`)
+        })
+        .catch(function(error) {
+            console.info(error);
+        })
 }
 
 const supply = () => {
@@ -62,7 +64,7 @@ const network = () => {
 }
 
 const ascii = (a) => {
-  grabASCII(a)
+    grabASCII(a)
 }
 
 const price = (qty) => {
@@ -84,11 +86,33 @@ const price = (qty) => {
         })
 }
 
+const checkpoints = () => {
+    function getLastCommits() {
+        return axios.get('https://api.github.com/repos/turtlecoin/checkpoints/commits');
+    }
+
+    function getLastPullRequests() {
+        return axios.get('https://api.github.com/repos/turtlecoin/checkpoints/pulls');
+    }
+
+    axios.all([getLastCommits(), getLastPullRequests()])
+        .then(axios.spread(function(commits, pulls) {
+            if (pulls.data[0].created_at) {
+                console.info(`\nCheckpoints updated ${timeago().format(pulls.data[0].created_at)}`);
+                console.info(`download checkpoints from: http://checkpoints.info`)
+            } else {
+                console.info(`\nCheckpoints updated ${timeago().format(commits.data[0].commit.author.date)}`);
+                console.info(`download checkpoints from: http://checkpoints.info`)
+            }
+        }));
+}
+
 // Export All Methods
 module.exports = {
     market,
     supply,
     network,
     price,
-    ascii
+    ascii,
+    checkpoints
 }
