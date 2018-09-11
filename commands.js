@@ -48,7 +48,7 @@ program
 
 program
     .command('network')
-    .alias('n')
+    .alias('ne')
     .description('Shows network data')
     .action(() => network());
 
@@ -72,7 +72,7 @@ program
 
 program
     .command('nodes')
-    .alias('n')
+    .alias('no')
     .description('Get all current nodes')
     .action(() => nodes());
 
