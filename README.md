@@ -5,7 +5,7 @@ Command line interface to check TurtleCoin network status and community activity
 ![Alt Text](https://media.giphy.com/media/8m7LEArtWVfHkuWpPV/giphy.gif)
 
 ### Version
-1.0.47
+1.0.48
 
 ## Usage
 

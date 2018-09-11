@@ -12,7 +12,8 @@ const {
     network,
     price,
     ascii,
-    checkpoints
+    checkpoints,
+    nodes
 } = require('./index');
 
 program
@@ -68,5 +69,11 @@ program
     .alias('c')
     .description('Get latest checkpoint update')
     .action(() => checkpoints());
+
+program
+    .command('nodes')
+    .alias('n')
+    .description('Get all current nodes')
+    .action(() => nodes());
 
 program.parse(process.argv);

@@ -1,6 +1,6 @@
 {
   "name": "trtl",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "description": "Trtl network status CLI",
   "main": "index.js",
   "preferGlobal": true,
@@ -14,6 +14,7 @@
     "axios": "^0.18.0",
     "colors": "^1.3.2",
     "commander": "^2.17.1",
+    "easy-table": "^1.1.1",
     "inquirer": "^6.2.0",
     "timeago.js": "^3.0.2",
     "turtlecoin-rpc": "^0.8.0"

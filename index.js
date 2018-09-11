@@ -12,9 +12,12 @@ const {
     numberWithCommas,
     formatBytes,
     grabASCII,
-    replaceAll
+    replaceAll,
+    getPublicNodeStatuses,
+    tableify
 } = require('./helpers');
 
+// Grabs coinmarketcap data and output the price of TurtleCoin formatted
 const market = () => {
     axios.get('https://api.coinmarketcap.com/v2/ticker/2958/?convert=LTC')
         .then((response) => {
@@ -36,6 +39,7 @@ const market = () => {
         })
 }
 
+// get coinmarketcap data to get circulating supply of TurtleCoin
 const supply = () => {
     axios.get('https://api.coinmarketcap.com/v2/ticker/2958/')
         .then(function(response) {
@@ -47,6 +51,7 @@ const supply = () => {
 
 }
 
+// Grabs network data from TurtleCoind
 const network = () => {
     daemon.getInfo()
         .then(function(response) {
@@ -62,10 +67,12 @@ const network = () => {
 
 }
 
+// Displays specified ASCII or a random ASCII
 const ascii = (a) => {
     grabASCII(a)
 }
 
+// Given a quantity of TRTL, will give you how much it is worth in USD and LTC
 const price = (qty) => {
     axios.get('https://api.coinmarketcap.com/v2/ticker/2958/?convert=LTC')
         .then((response) => {
@@ -85,12 +92,24 @@ const price = (qty) => {
         })
 }
 
+// Gets checkpoint update date from Github
 const checkpoints = () => {
     axios.get('https://api.github.com/repos/turtlecoin/checkpoints')
         .then((updateInfo) => {
           console.log(`\nCheckpoints updated ${timeago().format(updateInfo.data.updated_at)}`)
           console.log(`Download the latest checkpoint from: http://checkpoints.info/`)
         });
+}
+
+// Gets the status of all public nodes on the nodes-json list
+const nodes = () => {
+  getPublicNodeStatuses('https://raw.githubusercontent.com/turtlecoin/turtlecoin-nodes-json/master/turtlecoin-nodes.json')
+    .then((response) => {
+      tableify(response)
+    })
+    .catch((err) => {
+      console.info(err)
+    })
 }
 
 // Export All Methods
@@ -100,5 +119,6 @@ module.exports = {
     network,
     price,
     ascii,
-    checkpoints
+    checkpoints,
+    nodes
 }
