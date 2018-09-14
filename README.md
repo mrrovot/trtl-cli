@@ -56,7 +56,7 @@ List circulating supply (supply or 's')
 $ trtl supply
 ```
 
-Displays ascii text from a file in the ascii folder. If nothing is specified, a random ASCII will be picked.
+Displays ascii text from a file in the ascii folder. If nothing is specified, a random ASCII will be picked (ascii or a)
 ```sh
 $ trtl ascii <file>
 ```
@@ -69,6 +69,11 @@ $ trtl checkpoints
 Display every public node on the [turtlecoin-nodes-json](https://github.com/turtlecoin/turtlecoin-nodes-json) list (nodes or 'no')
 ```sh
 $ trtl nodes
+```
+
+Default command displays transaction pool. Adding a transaction hash will provide information about the transaction and if it is confirmed (tx or t)
+```sh
+$ trtl tx <transaction>
 ```
 
 ### Contribute
