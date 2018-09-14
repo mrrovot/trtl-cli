@@ -2,6 +2,7 @@ const TurtleCoind = require('turtlecoin-rpc').TurtleCoind
 const axios = require('axios')
 const colors = require('colors');
 const timeago = require("timeago.js");
+const easyTable = require('easy-table');
 const convert = 100000000
 
 const daemon = new TurtleCoind({
@@ -14,7 +15,8 @@ const {
     grabASCII,
     replaceAll,
     getPublicNodeStatuses,
-    tableify
+    getTransactionPool,
+    checkTransactionPool
 } = require('./helpers');
 
 // Grabs coinmarketcap data and output the price of TurtleCoin formatted
@@ -105,11 +107,30 @@ const checkpoints = () => {
 const nodes = () => {
   getPublicNodeStatuses('https://raw.githubusercontent.com/turtlecoin/turtlecoin-nodes-json/master/turtlecoin-nodes.json')
     .then((response) => {
-      tableify(response)
+      var t = new easyTable
+
+      response.forEach((item) => {
+        t.cell('Node', item.name)
+        t.cell('URL', item.url)
+        t.cell('Port', item.port)
+        t.cell('SSL', item.ssl ? "Yes" : "No")
+        t.cell('Synced', item.synced ? "Yes" : "No")
+        t.newRow()
+      })
+      t.sort()
+      console.info(`\n` + t.toString())
     })
     .catch((err) => {
       console.info(err)
     })
+}
+
+const transaction = (hash) => {
+  if(hash == undefined) {
+    getTransactionPool()
+  } else {
+    checkTransactionPool(hash)
+  }
 }
 
 // Export All Methods
@@ -120,5 +141,6 @@ module.exports = {
     price,
     ascii,
     checkpoints,
-    nodes
+    nodes,
+    transaction
 }

@@ -1,5 +1,12 @@
+const TurtleCoind = require('turtlecoin-rpc').TurtleCoind
+const easyTable = require('easy-table');
+const colors = require('colors');
 const fs = require('fs');
 const path = require('path');
+
+const daemon = new TurtleCoind({
+    host: 'public.turtlenode.io'
+})
 
 //helper to get number with commas
 const numberWithCommas = (x) => {
@@ -87,21 +94,59 @@ function getPublicNodeStatuses (url) {
   })
 }
 
-// Format Public Node data into a table
-function tableify(dataTable) {
-  var easyTable = require('easy-table');
-  var t = new easyTable
-
-  dataTable.forEach((item) => {
-    t.cell('Node', item.name)
-    t.cell('URL', item.url)
-    t.cell('Port', item.port)
-    t.cell('SSL', item.ssl ? "Yes" : "No")
-    t.cell('Synced', item.synced ? "Yes" : "No")
-    t.newRow()
+function getTransactionPool() {
+  daemon.getTransactionPool().then((transactions) => {
+    if(transactions != ''){
+      var t = new easyTable
+      transactions.forEach((item) => {
+        t.cell(`Amount`, item.amount_out/100)
+        t.cell(`Fee`, item.fee)
+        t.cell(`Size`, item.size)
+        t.cell(`Hash`, item.hash)
+        t.newRow()
+      })
+      console.info(`\n` + t.toString())
+    } else {
+      console.info("\nNo Transactions to show! Here's a turtle instead!\n") // tx pool empty
+      grabASCII('walker') // cute turtles suffice right?
+    }
+  }).catch((err) => {
+    if(err.typeError == undefined){ // As soon as a block arrives, nodes must sync again
+      console.info(`\nPublic node may not be synced! Try again.`.red)
+    }
   })
-  t.sort()
-  console.info(`\n` + t.toString())
+}
+
+function checkTransactionPool(checkHash) {
+  var txArray = []
+  daemon.getTransactionPool().then((transactions) => {// look in the transaction pool, check every transaction for checkHash, then build table
+      //Check every element
+      for(var i = 0; i < transactions.length; i++){
+        if(transactions[i].hash == checkHash){ // At the i'th hash, is it == checkHash
+          // Yes, build the table
+          var t = new easyTable
+          transactions.forEach((item) => {
+            if(item.hash == checkHash) {
+              txArray.push(item)
+              t.cell(`Amount`, txArray[0].amount_out/100)
+              t.cell(`Fee`, txArray[0].fee)
+              t.cell(`Size`, txArray[0].size)
+              t.cell(`Hash`, txArray[0].hash)
+              t.cell(`Status`, `Unconfirmed`.red) // Redundant? Nah
+              t.newRow()
+            }
+          })
+          console.info(`\n` + t.toString())
+        }
+      }
+      if(txArray[0].hash != checkHash){ // if the hash is not checkHash, it's confirmed
+        console.info(`\nConfirmed!`.green)
+      }
+  }).catch((err) => {
+    if(err.typeError == undefined){ // if undefined thrown, the transaction is confirmed
+      console.info(`\nConfirmed!`.green)
+    }
+  })
 }
 
 
@@ -110,5 +155,6 @@ module.exports = {
     formatBytes,
     grabASCII,
     getPublicNodeStatuses,
-    tableify
+    getTransactionPool,
+    checkTransactionPool
 };
